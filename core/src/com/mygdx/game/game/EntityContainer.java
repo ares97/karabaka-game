@@ -4,9 +4,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.entity.Bullet;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
-import com.mygdx.game.network.DatagramReceiver;
+import com.mygdx.game.network.DatagramSender;
 
-import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class EntityContainer implements Disposable {
     private EntityContainer() {
         bullets = new LinkedList<>();
         tanks = new LinkedList<>();
-        int server_receive_port = DatagramReceiver.instance.SERVER_RECEIVE_PORT;
+        int server_receive_port = DatagramSender.instance.SERVER_RECEIVE_PORT;
     }
 
     public void addBullet(Bullet bullet){

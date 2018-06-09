@@ -8,13 +8,13 @@ import java.net.SocketException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class DatagramReceiver {
+public class DatagramSender {
 
     DatagramSocket datagramSocket;
 
     public final int SERVER_RECEIVE_PORT = 3111;
 
-    public final static DatagramReceiver instance = new DatagramReceiver();
+    public final static DatagramSender instance = new DatagramSender();
 
 
     public void startSendingData() {
@@ -22,7 +22,7 @@ public class DatagramReceiver {
                 .scheduleWithFixedDelay(getRunnable(), 10, 5, TimeUnit.MILLISECONDS);
     }
 
-    private DatagramReceiver() {
+    private DatagramSender() {
         try {
             datagramSocket = new DatagramSocket();
         } catch (SocketException e) {
