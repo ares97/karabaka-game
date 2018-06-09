@@ -2,7 +2,7 @@ package com.mygdx.game.entity;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.TankTextures;
+import com.mygdx.game.utils.TankTextures;
 import com.mygdx.game.utils.Direction;
 import com.mygdx.game.utils.GameSettings;
 

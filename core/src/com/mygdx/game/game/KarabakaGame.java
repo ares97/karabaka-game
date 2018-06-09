@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.entity.Bullet;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
+import com.mygdx.game.utils.TankTextures;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class KarabakaGame extends ApplicationAdapter {
         for (Tank tank : tanks)
             batch.draw(tank.getTexture(), tank.x, tank.y);
 
-        for(Bullet bullet : bullets)
+        for (Bullet bullet : bullets)
             batch.draw(bullet.getTexture(), bullet.x, bullet.y);
     }
 
@@ -73,5 +74,10 @@ public class KarabakaGame extends ApplicationAdapter {
 
         bullets.add(new Bullet());
         bullets.add(new Bullet());
+
+        EntityContainer.instance.setBullets(bullets);
+        EntityContainer.instance.setTanks(tanks);
+        EntityContainer.instance.setPlayer(player);
+
     }
 }
