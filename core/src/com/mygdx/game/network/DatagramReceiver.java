@@ -1,12 +1,12 @@
 package com.mygdx.game.network;
 
-import com.mygdx.game.entity.Bullet;
-import com.mygdx.game.entity.Tank;
-import com.mygdx.game.game.EntityContainer;
-
 import java.io.IOException;
-import java.net.*;
-import java.util.concurrent.ExecutorService;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class DatagramReceiver {
 
@@ -14,30 +14,35 @@ public class DatagramReceiver {
 
     public final int SERVER_RECEIVE_PORT = 3111;
 
-
     public final static DatagramReceiver instance = new DatagramReceiver();
 
+
+    public void startSendingData() {
+        Executors.newScheduledThreadPool(2)
+                .scheduleWithFixedDelay(getRunnable(), 10, 5, TimeUnit.MILLISECONDS);
+    }
+
     private DatagramReceiver() {
-        Runnable runnable = () -> {
-            while (true) {
+        try {
+            datagramSocket = new DatagramSocket();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Runnable getRunnable() {
+        return () -> {
                 try {
                     InetAddress ip = InetAddress.getByName("127.0.0.1");
-                    datagramSocket = new DatagramSocket();
-                    String string = "hello world!";
+
+                    String mssg = DatagramUtils.getDatagram();
                     DatagramPacket datagramPacket =
-                            new DatagramPacket(string.getBytes(), string.length(), ip, 3000);
+                            new DatagramPacket(mssg.getBytes(), mssg.length(), ip, 3000);
                     datagramSocket.send(datagramPacket);
-                    datagramSocket.close();
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
         };
-
-        new Thread(runnable).start();
-
     }
 
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.entity.Bullet;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
+import com.mygdx.game.network.DatagramReceiver;
 import com.mygdx.game.network.DatagramUtils;
 import com.mygdx.game.utils.TankTextures;
 
@@ -26,13 +27,8 @@ public class KarabakaGame extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         img = TankTextures.instance.tankUp;
-
         addTrashData();
-
-        Tank playerTank = new Tank(img, 200, 90);
-        tanks.add(playerTank);
-        player = new Player(playerTank);
-        DatagramUtils.parseDatagram(DatagramUtils.getDatagram());
+        DatagramReceiver.instance.startSendingData();
     }
 
     @Override
@@ -44,7 +40,6 @@ public class KarabakaGame extends ApplicationAdapter {
         renderObjects();
 
         batch.end();
-
         update();
     }
 
@@ -77,6 +72,9 @@ public class KarabakaGame extends ApplicationAdapter {
         tanks.add(new Tank(img, 300, 10));
         tanks.add(new Tank(img, 400, 200));
 
+        Tank playerTank = new Tank(img, 200, 90);
+        tanks.add(playerTank);
+        player = new Player(playerTank);
 
         EntityContainer.instance.setBullets(bullets);
         EntityContainer.instance.setTanks(tanks);

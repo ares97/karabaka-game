@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class DatagramUtils {
 
-    public static String getDatagram() {
+    public synchronized static String getDatagram() {
         //string = player[i].x + "\" + player[i].y + "\" + ... + ":" bullet[i].x + "\" + bullet[i].y + "\"
         String datagram = "";
         for (Tank player : EntityContainer.instance.getTanks()) {
@@ -24,20 +24,17 @@ public class DatagramUtils {
         return datagram;
     }
 
-    public static void parseDatagram(String datagram) {
+    public synchronized static void parseDatagram(String datagram) {
         String[] entities = datagram.split(":");
 
-        String[] tankPackage = entities[0].split("-");
-        LinkedList<Tank> tanks = decodeTankPackage(tankPackage);
-
+        if (entities.length >= 1) {
+            String[] tankPackage = entities[0].split("-");
+            decodeTankPackage(tankPackage);
+        }
         if (entities.length == 2) {
             String[] bulletPackage = entities[1].split("-");
             decodeBulletPackage(bulletPackage);
         }
-
-
-        for (Tank tank : tanks)
-            System.out.println(tank);
     }
 
     private static void decodeBulletPackage(String[] bulletPackage) {
@@ -52,7 +49,7 @@ public class DatagramUtils {
         EntityContainer.instance.setBullets(bullets);
     }
 
-    private static LinkedList<Tank> decodeTankPackage(String[] tankPackage) {
+    private static void decodeTankPackage(String[] tankPackage) {
         LinkedList<Tank> tanks = new LinkedList<>();
         for (int i = 0; i < tankPackage.length; i += 3) {
             tanks.add(new Tank(
@@ -62,6 +59,5 @@ public class DatagramUtils {
             ));
         }
         EntityContainer.instance.setTanks(tanks);
-        return tanks;
     }
 }
