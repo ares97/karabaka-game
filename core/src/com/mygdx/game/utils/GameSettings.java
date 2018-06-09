@@ -6,6 +6,8 @@ public class GameSettings {
 
     public final int TANK_SIZE = 1;
 
+    public final int DISTANCE_PER_MOVE = 5;
+
     public static GameSettings instance = new GameSettings();
 
     private GameSettings() {

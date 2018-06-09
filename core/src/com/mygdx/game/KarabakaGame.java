@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
 
 import java.util.LinkedList;
@@ -14,23 +15,36 @@ public class KarabakaGame extends ApplicationAdapter {
     private SpriteBatch batch;
     private Texture img;
 
+    private Player player;
     private List<Tank> tanks = new LinkedList<>();
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        img = new Texture("core/assets/badlogic.jpg");
+        img = new Texture("core/assets/Tank.png");
+
         tanks.add(new Tank(img, 10, 10));
         tanks.add(new Tank(img, 200, 200));
+
+        Tank playerTank = new Tank(img, 60, 90);
+        tanks.add(playerTank);
+        player = new Player(playerTank);
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         batch.begin();
         renderTanks();
         batch.end();
+
+        update();
+    }
+
+    private void update() {
+        player.handlePlayerInput();
     }
 
     private void renderTanks() {
