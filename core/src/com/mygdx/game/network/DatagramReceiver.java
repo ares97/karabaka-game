@@ -15,8 +15,8 @@ public class DatagramReceiver {
     public final static DatagramReceiver instance = new DatagramReceiver();
 
     public void startReceivingData(){
-        Executors.newScheduledThreadPool(2)
-                .scheduleWithFixedDelay(getRunnable(), 10, 5, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(1)
+                .scheduleWithFixedDelay(getRunnable(), 10, 1, TimeUnit.MILLISECONDS);
     }
 
     private Runnable getRunnable() {

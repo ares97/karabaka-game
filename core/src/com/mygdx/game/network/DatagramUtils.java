@@ -31,9 +31,10 @@ public class DatagramUtils {
             String[] tankPackage = entities[0].split("-");
             decodeTankPackage(tankPackage);
         }
-        if (entities.length == 2) {
+        if (entities.length >= 2) {
             String[] bulletPackage = entities[1].split("-");
             decodeBulletPackage(bulletPackage);
+            System.out.println("bullet!");
         }
     }
 
@@ -46,7 +47,6 @@ public class DatagramUtils {
                     Float.valueOf(bulletPackage[i + 1])
             ));
         }
-        System.out.println(String.valueOf(bullets.size()));
         EntityContainer.instance.setBullets(bullets);
     }
 

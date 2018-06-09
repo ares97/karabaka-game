@@ -8,8 +8,8 @@ import com.mygdx.game.utils.GameSettings;
 
 public class Bullet extends Rectangle {
 
-    private Texture texture;
-    private Direction direction;
+    private Texture texture = TankTextures.instance.bullet;
+    private Direction direction = Direction.UP;
 
     public Bullet() {
         texture = TankTextures.instance.bullet;
@@ -26,20 +26,20 @@ public class Bullet extends Rectangle {
     }
 
     public void update() {
-        switch (direction) {
-            case RIGHT:
-                x += GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
-                break;
-            case LEFT:
-                x -= GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
-                break;
-            case DOWN:
-                y -= GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
-                break;
-            case UP:
-                y += GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
-                break;
-        }
+//        switch (direction) {
+//            case RIGHT:
+//                x += GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
+//                break;
+//            case LEFT:
+//                x -= GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
+//                break;
+//            case DOWN:
+//                y -= GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
+//                break;
+//            case UP:
+//                y += GameSettings.instance.BULLET_DISTANCE_PER_MOVE;
+//                break;
+//        }
     }
 
     public Direction getDirection() {

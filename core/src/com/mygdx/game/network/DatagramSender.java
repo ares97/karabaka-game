@@ -18,8 +18,8 @@ public class DatagramSender {
 
 
     public void startSendingData() {
-        Executors.newScheduledThreadPool(2)
-                .scheduleWithFixedDelay(getRunnable(), 10, 5, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(1)
+                .scheduleWithFixedDelay(getRunnable(), 10, 1, TimeUnit.MILLISECONDS);
     }
 
     private DatagramSender() {

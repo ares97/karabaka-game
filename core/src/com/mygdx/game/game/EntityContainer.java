@@ -20,27 +20,39 @@ public class EntityContainer implements Disposable {
     private EntityContainer() {
         bullets = new LinkedList<>();
         tanks = new LinkedList<>();
-        int server_receive_port = DatagramSender.instance.SERVER_RECEIVE_PORT;
     }
 
-    public void addBullet(Bullet bullet){
-        bullets.add(bullet);
+    private Object bulletLock = new Object();
+    private Object tankLock = new Object();
+
+    public void addBullet(Bullet bullet) {
+        synchronized (bulletLock) {
+            bullets.add(bullet);
+        }
     }
 
     public List<Bullet> getBullets() {
-        return bullets;
+        synchronized (bulletLock) {
+            return bullets;
+        }
     }
 
     public void setBullets(List<Bullet> bullets) {
-        this.bullets = bullets;
+        synchronized (bulletLock) {
+            this.bullets = bullets;
+        }
     }
 
     public List<Tank> getTanks() {
-        return tanks;
+        synchronized (tankLock) {
+            return tanks;
+        }
     }
 
     public void setTanks(List<Tank> tanks) {
-        this.tanks = tanks;
+        synchronized (tankLock) {
+            this.tanks = tanks;
+        }
     }
 
     public Player getPlayer() {
@@ -53,10 +65,10 @@ public class EntityContainer implements Disposable {
 
     @Override
     public void dispose() {
-        for (Bullet bullet : bullets) {
+        for (Bullet bullet : getBullets()) {
             bullet.getTexture().dispose();
         }
-        for (Tank tank : tanks) {
+        for (Tank tank : getTanks()) {
             tank.getTexture().dispose();
         }
     }
