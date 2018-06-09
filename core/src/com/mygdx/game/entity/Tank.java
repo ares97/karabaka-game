@@ -6,7 +6,7 @@ import com.mygdx.game.utils.GameSettings;
 
 public class Tank extends Rectangle {
 
-    private final Texture texture;
+    private Texture texture;
 
     public Tank(Texture texture) {
         this.texture = texture;
@@ -22,5 +22,9 @@ public class Tank extends Rectangle {
 
     public Texture getTexture() {
         return texture;
+    }
+
+    public void setTexture(Texture texture) {
+        this.texture = texture;
     }
 }

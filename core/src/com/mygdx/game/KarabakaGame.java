@@ -21,7 +21,7 @@ public class KarabakaGame extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        img = new Texture("core/assets/Tank.png");
+        img = TankTextures.instance.tankUp;
 
         tanks.add(new Tank(img, 10, 10));
         tanks.add(new Tank(img, 200, 200));
