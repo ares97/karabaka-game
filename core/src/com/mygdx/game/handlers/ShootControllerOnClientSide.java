@@ -7,7 +7,6 @@ import com.mygdx.game.utils.Direction;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 public class ShootControllerOnClientSide implements ShootController {
 
@@ -23,18 +22,26 @@ public class ShootControllerOnClientSide implements ShootController {
     public void shot(Direction direction) {
         if (canShoot) {
             canShoot = false;
-            Bullet bullet = new Bullet();
-            bullet.setDirection(direction);
-            bullet.x = tank.x;
-            bullet.y = tank.y;
-            EntityContainer.instance.addBullet(bullet);
-             new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    canShoot = true;
-                }
-            }, 1000);
+            EntityContainer.instance.addBullet(getBullet(direction));
+            handleCooldown();
         }
+    }
+
+    private Bullet getBullet(Direction direction) {
+        Bullet bullet = new Bullet();
+        bullet.setDirection(direction);
+        bullet.x = tank.x;
+        bullet.y = tank.y;
+        return bullet;
+    }
+
+    private void handleCooldown() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                canShoot = true;
+            }
+        }, 1000);
     }
 }
 
