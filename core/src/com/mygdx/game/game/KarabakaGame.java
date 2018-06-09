@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.entity.Bullet;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
+import com.mygdx.game.network.DatagramUtils;
 import com.mygdx.game.utils.TankTextures;
 
 import java.util.LinkedList;
@@ -31,6 +32,7 @@ public class KarabakaGame extends ApplicationAdapter {
         Tank playerTank = new Tank(img, 200, 90);
         tanks.add(playerTank);
         player = new Player(playerTank);
+        DatagramUtils.setEntitesFromDatagram(DatagramUtils.getDatagram());
     }
 
     @Override

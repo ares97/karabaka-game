@@ -34,8 +34,8 @@ public class ShootControllerOnClientSide implements ShootController {
     private Bullet getBullet(Direction direction) {
         Bullet bullet = new Bullet();
         bullet.setDirection(direction);
-        bullet.x = tank.x + GameSettings.instance.TANK_SIZE;
-        bullet.y = tank.y + GameSettings.instance.TANK_SIZE;
+        bullet.x = tank.x;
+        bullet.y = tank.y;
         return bullet;
     }
 
