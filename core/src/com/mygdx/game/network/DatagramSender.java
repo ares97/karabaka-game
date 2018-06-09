@@ -10,9 +10,9 @@ import java.util.concurrent.TimeUnit;
 
 public class DatagramSender {
 
-    DatagramSocket datagramSocket;
+    private DatagramSocket datagramSocket;
 
-    public final int SERVER_RECEIVE_PORT = 3111;
+    public static final int SERVER_RECEIVE_PORT = 3000;
 
     public final static DatagramSender instance = new DatagramSender();
 
@@ -37,7 +37,7 @@ public class DatagramSender {
 
                     String mssg = DatagramUtils.getDatagram();
                     DatagramPacket datagramPacket =
-                            new DatagramPacket(mssg.getBytes(), mssg.length(), ip, 3000);
+                            new DatagramPacket(mssg.getBytes(), mssg.length(), ip, SERVER_RECEIVE_PORT);
                     datagramSocket.send(datagramPacket);
                 } catch (IOException e) {
                     e.printStackTrace();

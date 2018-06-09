@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.entity.Bullet;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
-import com.mygdx.game.network.DatagramSender;
 import com.mygdx.game.utils.TankTextures;
 
 import java.util.LinkedList;
@@ -27,7 +26,8 @@ public class KarabakaGame extends ApplicationAdapter {
         batch = new SpriteBatch();
         img = TankTextures.instance.tankUp;
         addTrashData();
-        DatagramSender.instance.startSendingData();
+       // DatagramSender.instance.startSendingData();
+       // DatagramReceiver.instance.startReceivingData();
     }
 
     @Override

@@ -46,6 +46,7 @@ public class DatagramUtils {
                     Float.valueOf(bulletPackage[i + 1])
             ));
         }
+        System.out.println(String.valueOf(bullets.size()));
         EntityContainer.instance.setBullets(bullets);
     }
 
@@ -58,6 +59,7 @@ public class DatagramUtils {
                     Direction.valueOf(tankPackage[i + 2])
             ));
         }
+        System.out.println(tanks.size());
         EntityContainer.instance.setTanks(tanks);
     }
 }
