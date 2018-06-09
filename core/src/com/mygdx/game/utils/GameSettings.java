@@ -6,7 +6,7 @@ public class GameSettings {
 
     public final int TANK_SIZE = 64;
 
-    public final int BULLET_DISTANCE_PER_MOVE = 5;
+    public final int BULLET_DISTANCE_PER_MOVE = 10;
     public final int DISTANCE_PER_MOVE = 3;
 
     public static GameSettings instance = new GameSettings();

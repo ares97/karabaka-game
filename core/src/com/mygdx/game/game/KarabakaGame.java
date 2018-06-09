@@ -28,7 +28,7 @@ public class KarabakaGame extends ApplicationAdapter {
 
         addTrashData();
 
-        Tank playerTank = new Tank(img, 60, 90);
+        Tank playerTank = new Tank(img, 200, 90);
         tanks.add(playerTank);
         player = new Player(playerTank);
     }
@@ -48,8 +48,13 @@ public class KarabakaGame extends ApplicationAdapter {
 
     private void update() {
         player.handlePlayerInput();
-        for (Bullet bullet : bullets)
+        for (Bullet bullet : bullets) {
             bullet.update();
+            for (Tank tank: tanks){
+                if (bullet.overlaps(tank))
+                    tank.x = -999;
+            }
+        }
     }
 
     private void renderObjects() {
@@ -67,11 +72,9 @@ public class KarabakaGame extends ApplicationAdapter {
     }
 
     private void addTrashData() {
-        tanks.add(new Tank(img, 10, 10));
-        tanks.add(new Tank(img, 200, 200));
+        tanks.add(new Tank(img, 300, 10));
+        tanks.add(new Tank(img, 400, 200));
 
-        bullets.add(new Bullet());
-        bullets.add(new Bullet());
 
         EntityContainer.instance.setBullets(bullets);
         EntityContainer.instance.setTanks(tanks);
