@@ -20,6 +20,11 @@ public class Bullet extends Rectangle {
         height = 16;
     }
 
+    public Bullet(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
     public void update() {
         switch (direction) {
             case RIGHT:

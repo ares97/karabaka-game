@@ -24,18 +24,36 @@ public class DatagramUtils {
         return datagram;
     }
 
-    public static void setEntitesFromDatagram(String datagram) {
+    public static void parseDatagram(String datagram) {
         String[] entities = datagram.split(":");
+
         String[] tankPackage = entities[0].split("-");
+        LinkedList<Tank> tanks = decodeTankPackage(tankPackage);
 
         if (entities.length == 2) {
             String[] bulletPackage = entities[1].split("-");
-
-            System.out.println(bulletPackage);
-            LinkedList<Bullet> bullets = new LinkedList<>();
+            decodeBulletPackage(bulletPackage);
         }
-        LinkedList<Tank> tanks = new LinkedList<>();
 
+
+        for (Tank tank : tanks)
+            System.out.println(tank);
+    }
+
+    private static void decodeBulletPackage(String[] bulletPackage) {
+        LinkedList<Bullet> bullets = new LinkedList<>();
+
+        for (int i = 0; i < bulletPackage.length; i += 2) {
+            bullets.add(new Bullet(
+                    Float.valueOf(bulletPackage[i]),
+                    Float.valueOf(bulletPackage[i + 1])
+            ));
+        }
+        EntityContainer.instance.setBullets(bullets);
+    }
+
+    private static LinkedList<Tank> decodeTankPackage(String[] tankPackage) {
+        LinkedList<Tank> tanks = new LinkedList<>();
         for (int i = 0; i < tankPackage.length; i += 3) {
             tanks.add(new Tank(
                     Float.valueOf(tankPackage[i]),
@@ -43,7 +61,7 @@ public class DatagramUtils {
                     Direction.valueOf(tankPackage[i + 2])
             ));
         }
-        for (Tank tank : tanks)
-            System.out.println(tank);
+        EntityContainer.instance.setTanks(tanks);
+        return tanks;
     }
 }

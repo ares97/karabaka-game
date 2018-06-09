@@ -32,7 +32,7 @@ public class KarabakaGame extends ApplicationAdapter {
         Tank playerTank = new Tank(img, 200, 90);
         tanks.add(playerTank);
         player = new Player(playerTank);
-        DatagramUtils.setEntitesFromDatagram(DatagramUtils.getDatagram());
+        DatagramUtils.parseDatagram(DatagramUtils.getDatagram());
     }
 
     @Override
