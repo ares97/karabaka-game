@@ -33,20 +33,20 @@ public class Player {
 
     public void handlePlayerInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            moveController.moveTank((Direction.LEFT));
             tank.setDirection(Direction.LEFT);
+            moveController.moveTank((Direction.LEFT));
             tank.setTexture(TankTextures.instance.tankLeft);
         } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            moveController.moveTank(Direction.UP);
             tank.setDirection(Direction.UP);
+            moveController.moveTank(Direction.UP);
             tank.setTexture(TankTextures.instance.tankUp);
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            moveController.moveTank(Direction.DOWN);
             tank.setDirection(Direction.DOWN);
+            moveController.moveTank(Direction.DOWN);
             tank.setTexture(TankTextures.instance.tankDown);
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            moveController.moveTank(Direction.RIGHT);
             tank.setDirection(Direction.RIGHT);
+            moveController.moveTank(Direction.RIGHT);
             tank.setTexture(TankTextures.instance.tankRight);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {

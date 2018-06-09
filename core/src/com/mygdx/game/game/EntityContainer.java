@@ -1,13 +1,15 @@
 package com.mygdx.game.game;
 
+import com.badlogic.gdx.utils.Disposable;
 import com.mygdx.game.entity.Bullet;
 import com.mygdx.game.entity.Player;
 import com.mygdx.game.entity.Tank;
 
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class EntityContainer {
+public class EntityContainer implements Disposable {
 
     private List<Bullet> bullets;
     private List<Tank> tanks;
@@ -18,6 +20,10 @@ public class EntityContainer {
     private EntityContainer() {
         bullets = new LinkedList<>();
         tanks = new LinkedList<>();
+    }
+
+    public void addBullet(Bullet bullet){
+        bullets.add(bullet);
     }
 
     public List<Bullet> getBullets() {
@@ -42,5 +48,15 @@ public class EntityContainer {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    @Override
+    public void dispose() {
+        for (Bullet bullet : bullets) {
+            bullet.getTexture().dispose();
+        }
+        for (Tank tank : tanks) {
+            tank.getTexture().dispose();
+        }
     }
 }

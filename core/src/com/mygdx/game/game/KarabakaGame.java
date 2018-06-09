@@ -53,19 +53,17 @@ public class KarabakaGame extends ApplicationAdapter {
     }
 
     private void renderObjects() {
-        for (Tank tank : tanks)
+        for (Tank tank : EntityContainer.instance.getTanks())
             batch.draw(tank.getTexture(), tank.x, tank.y);
 
-        for (Bullet bullet : bullets)
+        for (Bullet bullet : EntityContainer.instance.getBullets())
             batch.draw(bullet.getTexture(), bullet.x, bullet.y);
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        for (Tank tank : tanks) {
-            tank.getTexture().dispose();
-        }
+        EntityContainer.instance.dispose();
     }
 
     private void addTrashData() {
